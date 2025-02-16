@@ -127,34 +127,46 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
+            color: var(--light);
+            text-decoration: none;
             transition: all 0.3s;
-        }
-
-        .social-links a::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: 0.5s;
-        }
-
-        .social-links a:hover::before {
-            left: 100%;
         }
 
         .social-links a:hover {
             transform: translateY(-5px);
             background: var(--primary);
         }
+        
 
         /* เอฟเฟกต์ข้อความลอยได้ */
         .floating-text {
             animation: float 3s ease-in-out infinite;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(45, 52, 54, 0.95);
+            padding: 15px 20px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .navbar-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .navbar-link {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 10px 15px;
+            border-radius: 8px;
         }
 
         @keyframes float {
@@ -192,6 +204,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- แถบนำทาง -->
+    <nav class="navbar">
+        <div class="navbar-links">
+            <a href="index.html" class="navbar-link">หน้าหลัก</a>
+            <a href="about.html" class="navbar-link">เกี่ยวกับสภา</a>
+            <a href="https://player-council.42web.io/?i=1" class="navbar-link" target="_blank">สมัครเข้าสภาผู้เล่น</a>
+
+        </div>
+    </nav>
+
     <header>
         <h1 class="floating-text">2TB - Hotel Hideaway Ambassador</h1>
     </header>
