@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Hideaway Players' Council - Application</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="player.png">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Notification Element -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle notification-icon"></i>
+        <span id="notification-message"></span>
+        <button class="notification-close" onclick="closeNotification()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-hotel"></i>
+            <span>Hotel Hideaway</span>
+        </div>
+        <div class="menu-toggle" id="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav id="main-nav">
+            <a href="index.html">2TB</a>
+            <a href="about.html">เกี่ยวกับสภา</a>
+            <a href="aprove.html" class="active">สมัครเข้าสภาผู้เล่น</a>
+        </nav>
+        <div class="language-switch">
+            <button onclick="setLanguage('en')" id="lang-en" class="lang-btn active">EN</button>
+            <span class="divider">|</span>
+            <button onclick="setLanguage('th')" id="lang-th" class="lang-btn">TH</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 data-lang="en">Hotel Hideaway Players' Council</h1>
+            <h1 data-lang="th" style="display:none;">สภาผู้เล่น Hotel Hideaway</h1>
+            <p data-lang="en">Lead by Ambassador 2TB</p>
+            <p data-lang="th" style="display:none;">นำโดย Ambassador 2TB</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Application Section -->
+        <section class="application-section">
+            <h2 class="section-title" data-lang="en"><i class="fas fa-file-alt"></i> Apply to the Council</h2>
+            <h2 class="section-title" data-lang="th" style="display:none;"><i class="fas fa-file-alt"></i> สมัครเข้าร่วมสภา</h2>
+
+            <!-- Requirements Box -->
+            <div class="requirements-box">
+                <h3 data-lang="en">Before You Apply</h3>
+                <h3 data-lang="th" style="display:none;">ก่อนที่คุณจะสมัคร</h3>
+                
+                <p data-lang="en">Please make sure you meet the following requirements before submitting your application:</p>
+                <p data-lang="th" style="display:none;">โปรดตรวจสอบให้แน่ใจว่าคุณมีคุณสมบัติตรงตามข้อกำหนดเหล่านี้ก่อนส่งใบสมัคร:</p>
+                
+                <ul class="requirements-list" data-lang="en">
+                    <li>Be at least 18 years old.</li>
+                    <li>Understand the community guidelines and respect them.</li>
+                    <li>Work well as part of a team and contribute effectively.</li>
+                    <li>Have been registered with Hotel Hideaway for at least 6 months.</li>
+                    <li>Have no warnings for hate speech or disruptive behavior in the game.</li>
+                    <li>Be motivated to organize community events and promote a safe gaming environment.</li>
+                </ul>
+                
+                <ul class="requirements-list" data-lang="th" style="display:none;">
+                    <li>มีอายุอย่างน้อย 18 ปี</li>
+                    <li>เข้าใจและปฏิบัติตามแนวทางชุมชน</li>
+                    <li>ทำงานร่วมกับทีมได้ดีและมีส่วนร่วมอย่างมีประสิทธิภาพ</li>
+                    <li>ลงทะเบียนกับ Hotel Hideaway มาอย่างน้อย 6 เดือน</li>
+                    <li>ไม่มีประวัติการถูกเตือนเกี่ยวกับคำพูดแสดงความเกลียดชังหรือพฤติกรรมรบกวนในเกม</li>
+                    <li>มีแรงจูงใจในการจัดกิจกรรมชุมชนและส่งเสริมสภาพแวดล้อมการเล่นเกมที่ปลอดภัย</li>
+                </ul>
+                
+                <h4 class="notes-title" data-lang="en">Important Notes:</h4>
+                <h4 class="notes-title" data-lang="th" style="display:none;">หมายเหตุสำคัญ:</h4>
+                
+                <ul class="notes-list" data-lang="en">
+                    <li>You can submit only one application per round.</li>
+                    <li>Please refrain from contacting customer support or other channels to inquire about your application status. You will be contacted if selected.</li>
+                    <li>Ambassadors cannot provide any information or recommendations regarding your application. All applications are reviewed fairly and individually.</li>
+                    <li>Only one account can be used to apply. Duplicate applications will result in disqualification.</li>
+                    <li>You cannot apply on behalf of someone else. Applications must be submitted by the applicant.</li>
+                    <li>Do not change your in-game name during the selection process.</li>
+                </ul>
+                
+                <ul class="notes-list" data-lang="th" style="display:none;">
+                    <li>คุณสามารถส่งใบสมัครได้เพียงครั้งเดียวต่อรอบ</li>
+                    <li>โปรดอย่าติดต่อฝ่ายสนับสนุนลูกค้าหรือช่องทางอื่น ๆ เพื่อสอบถามสถานะการสมัคร คุณจะได้รับการติดต่อหากได้รับเลือก</li>
+                    <li>Ambassadors ไม่สามารถให้ข้อมูลหรือคำแนะนำใด ๆ เกี่ยวกับใบสมัครของคุณ ใบสมัครทั้งหมดจะได้รับการตรวจสอบอย่างยุติธรรมและเป็นรายบุคคล</li>
+                    <li>ใช้บัญชีเดียวเท่านั้นในการสมัคร การส่งใบสมัครซ้ำจะทำให้ถูกตัดสิทธิ์</li>
+                    <li>คุณไม่สามารถสมัครแทนคนอื่นได้ ใบสมัครต้องถูกส่งโดยผู้สมัครเอง</li>
+                    <li>อย่าเปลี่ยนชื่อในเกมของคุณในระหว่างกระบวนการคัดเลือก</li>
+                </ul>
+                
+                <h4 class="announcement-title" data-lang="en">Announcement of Results:</h4>
+                <h4 class="announcement-title" data-lang="th" style="display:none;">ประกาศผล:</h4>
+                
+                <p class="announcement-text" data-lang="en">
+                    The results will be announced on 
+                    <a href="https://www.facebook.com/profile.php?id=100090158242868" target="_blank">Facebook</a> and 
+                    <a href="https://discord.gg/eEybV9ksBf" target="_blank">Discord</a>. 
+                    If you are selected, an interview will be conducted in Discord. Please join the 
+                    <a href="https://discord.gg/eEybV9ksBf" target="_blank">Discord server</a> to facilitate the process.
+                </p>
+                
+                <p class="announcement-text" data-lang="th" style="display:none;">
+                    ผลการสมัครจะประกาศใน 
+                    <a href="https://www.facebook.com/profile.php?id=100090158242868" target="_blank">Facebook</a> และ 
+                    <a href="https://discord.gg/eEybV9ksBf" target="_blank">Discord</a> 
+                    หากคุณได้รับเลือก จะมีการสัมภาษณ์ใน Discord โปรดเข้าร่วม 
+                    <a href="https://discord.gg/eEybV9ksBf" target="_blank">Discord server</a> เพื่อความสะดวกในการดำเนินการ
+                </p>
+            </div>
+
+            <!-- Application Form -->
+            <div class="form-container">
+                <div class="form-header">
+                    <img src="https://media.istockphoto.com/id/1278745898/vector/online-application-form-to-fill-popped-above-the-notebook-laptop-monitor-screen-icon-vector.jpg?s=612x612&w=0&k=20&c=Q2wiky1WhI54PqB7dc0HPqp0dsWHrNyh832Xg_r0M8Y=" 
+                         alt="Council Application" 
+                         class="form-image">
+                    <h3 data-lang="en">Council Application Form</h3>
+                    <h3 data-lang="th" style="display:none;">แบบฟอร์มสมัครเข้าร่วมสภา</h3>
+                </div>
+
+                <form id="councilForm">
+                    <div class="form-group">
+                        <label for="name" data-lang="en">Full Hideaway Name</label>
+                        <label for="name" data-lang="th" style="display:none;">ชื่อในเกม</label>
+                        <input type="text" id="name" name="entry.956631575" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="facebook" data-lang="en">Facebook Link</label>
+                        <label for="facebook" data-lang="th" style="display:none;">ลิงค์เฟส</label>
+                        <input type="text" id="facebook" name="entry.1458081378" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="why-join" data-lang="en">Why are you interested in joining the Players' Council in Hotel Hideaway?</label>
+                        <label for="why-join" data-lang="th" style="display:none;">ทำไมคุณถึงสนใจเข้าร่วมเป็นสมาชิกสภาผู้เล่นใน Hotel Hideaway?</label>
+                        <textarea id="why-join" name="entry.1544080678" rows="5" required></textarea>
+                    </div>
+                      rows="5" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="skills" data-lang="en">What skills or knowledge do you have that could help the council operate smoothly?</label>
+                        <label for="skills" data-lang="th" style="display:none;">คุณมีทักษะหรือความรู้ในด้านใดที่คิดว่าจะช่วยให้สภาผู้เล่นดำเนินงานได้อย่างราบรื่น?</label>
+                        <textarea id="skills" name="entry.468006335" rows="5" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="conflict-resolution" data-lang="en">How would you handle situations where there are conflicting opinions within the team?</label>
+                        <label for="conflict-resolution" data-lang="th" style="display:none;">หากมีความคิดเห็นที่ขัดแย้งกันในทีม คุณจะรับมือกับสถานการณ์นั้นอย่างไร?</label>
+                        <textarea id="conflict-resolution" name="entry.15590957" rows="5" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="emergency" data-lang="en">Are you prepared to assist in resolving urgent issues immediately if needed?</label>
+                        <label for="emergency" data-lang="th" style="display:none;">หากมีปัญหาที่ต้องการการจัดการด่วน คุณพร้อมที่จะช่วยแก้ไขทันทีหรือไม่?</label>
+                        <textarea id="emergency" name="entry.1214862" rows="5" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="understanding" data-lang="en">How do you understand the role of a Players' Council member in Hotel Hideaway?</label>
+                        <label for="understanding" data-lang="th" style="display:none;">คุณเข้าใจบทบาทของสมาชิกสภาผู้เล่นใน Hotel Hideaway อย่างไร?</label>
+                        <textarea id="understanding" name="entry.1031521720" rows="5" required></textarea>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms" data-lang="en">
+                            I agree to the <a href="#" onclick="openTermsModal()">Terms of Use</a> for data collection and sharing for decision-making purposes.
+                        </label>
+                        <label for="terms" data-lang="th" style="display:none;">
+                            ฉันยอมรับ <a href="#" onclick="openTermsModal()">ข้อกำหนดการใช้งาน</a> สำหรับการเก็บข้อมูลและส่งต่อข้อมูลเพื่อการตัดสินใจ
+                        </label>
+                    </div>
+                    
+                    <button type="button" onclick="submitForm()" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        <span data-lang="en">Submit Application</span>
+                        <span data-lang="th" style="display:none;">ส่งใบสมัคร</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div data-lang="en">
+                <p>&copy; 2024 Hotel Hideaway Players Council</p>
+                <div class="footer-links">
+                    <a href="https://www.facebook.com/profile.php?id=100090158242868" target="_blank">Facebook 2TB</a>
+                    <span class="divider">|</span>
+                    <a href="https://www.facebook.com/profile.php?id=61571440132313" target="_blank">Council Facebook</a>
+                    <span class="divider">|</span>
+                    <a href="https://discord.gg/eEybV9ksBf" target="_blank">Discord Hotel Hideaway TH</a>
+                </div>
+            </div>
+            
+            <div data-lang="th" style="display:none;">
+                <p>&copy; 2024 สภาผู้เล่น Hotel Hideaway</p>
+                <div class="footer-links">
+                    <a href="https://www.facebook.com/profile.php?id=100090158242868" target="_blank">เฟสบุ๊ค 2TB</a>
+                    <span class="divider">|</span>
+                    <a href="https://www.facebook.com/profile.php?id=61571440132313" target="_blank">เฟสบุ๊คสภา</a>
+                    <span class="divider">|</span>
+                    <a href="https://discord.gg/eEybV9ksBf" target="_blank">Discord Hotel Hideaway TH</a>
+                </div>
+            </div>
+            
+            <div class="social-icons">
+                <a href="https://www.facebook.com/profile.php?id=100090158242868" target="_blank" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://discord.gg/eEybV9ksBf" target="_blank" aria-label="Discord">
+                    <i class="fab fa-discord"></i>
+                </a>
+                <a href="https://www.instagram.com/hh_playercouncil/" target="_blank" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Set language
+        function setLanguage(lang) {
+            const elements = document.querySelectorAll('[data-lang]');
+            elements.forEach(element => {
+                element.style.display = element.dataset.lang === lang ? 'block' : 'none';
+            });
+            
+            // Update active language in the switch
+            document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+            document.getElementById('lang-th').classList.toggle('active', lang === 'th');
+            
+            // Store the language preference
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        // Terms of Use modal
+        function openTermsModal() {
+            const lang = localStorage.getItem('preferredLanguage') || 'en';
+            const message = lang === 'en' 
+                ? 'Terms of Use:\n\nBy submitting this application, you agree that your data will be collected and shared for decision-making purposes. Your information will be used to evaluate your application and facilitate further communication.'
+                : 'ข้อกำหนดการใช้งาน:\n\nโดยการส่งใบสมัครนี้ คุณยอมรับว่าข้อมูลของคุณจะถูกเก็บรวบรวมและแบ่งปันเพื่อวัตถุประสงค์ในการตัดสินใจ ข้อมูลของคุณจะถูกใช้เพื่อประเมินใบสมัครของคุณและอำนวยความสะดวกในการสื่อสารต่อไป';
+            
+            alert(message);
+        }
+
+        // Show notification
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            const notificationMessage = document.getElementById('notification-message');
+            const notificationIcon = document.querySelector('.notification-icon');
+            
+            notification.className = 'notification ' + type;
+            notificationMessage.textContent = message;
+            
+            if (type === 'success') {
+                notificationIcon.className = 'fas fa-check-circle notification-icon';
+            } else {
+                notificationIcon.className = 'fas fa-exclamation-circle notification-icon';
+            }
+            
+            notification.classList.add('show');
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                closeNotification();
+            }, 5000);
+        }
+        
+        // Close notification
+        function closeNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.remove('show');
+        }
+
+        // Submit form
+        function submitForm() {
+            const form = document.getElementById('councilForm');
+            const termsCheckbox = document.getElementById('terms');
+            const lang = localStorage.getItem('preferredLanguage') || 'en';
+            
+            // Validate form
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            
+            // Check terms agreement
+            if (!termsCheckbox.checked) {
+                const message = lang === 'en' 
+                    ? 'Please agree to the Terms of Use before submitting your application.'
+                    : 'โปรดยอมรับข้อกำหนดการใช้งานก่อนส่งใบสมัครของคุณ';
+                
+                showNotification(message, 'error');
+                return;
+            }
+            
+            // Create form data
+            const formData = new FormData(form);
+            
+            // Submit to Google Form
+            fetch('https://docs.google.com/forms/d/e/1FAIpQLScLG_sPIBXmrLLON7fS40lMN3wjyLl8o0qvhw91AnbrMCtjwQ/formResponse', {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors',
+            })
+            .then(() => {
+                const successMessage = lang === 'en'
+                    ? 'Your application has been submitted successfully! Please wait for the announcement on Facebook or Discord.'
+                    : 'ส่งใบสมัครของคุณเรียบร้อยแล้ว! โปรดรอประกาศผลทาง Facebook หรือ Discord';
+                
+                showNotification(successMessage, 'success');
+                form.reset();
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            })
+            .catch((error) => {
+                console.error('Error submitting the form:', error);
+                
+                const errorMessage = lang === 'en'
+                    ? 'There was an error submitting your application. Please try again later.'
+                    : 'เกิดข้อผิดพลาดในการส่งใบสมัครของคุณ โปรดลองอีกครั้งในภายหลัง';
+                
+                showNotification(errorMessage, 'error');
+            });
+        }
+
+        // Create particle effect
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random position
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                
+                // Random size
+                const size = Math.random() * 5 + 2;
+                
+                // Random animation duration
+                const duration = Math.random() * 20 + 10;
+                
+                // Random delay
+                const delay = Math.random() * 5;
+                
+                // Apply styles
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for saved language preference
+            const savedLanguage = localStorage.getItem('preferredLanguage');
+            if (savedLanguage) {
+                setLanguage(savedLanguage);
+            } else {
+                // Default to English
+                setLanguage('en');
+            }
+            
+            // Initialize particles
+            createParticles();
+        });
+    </script>
+</body>
+</html>
