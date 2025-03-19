@@ -7,13 +7,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="Player.png">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Your existing CSS styles here */
-        
-        /* Enhanced Notification Styles */
+        /* Override notification styles to ensure it appears above header */
         .notification {
             position: fixed;
-            top: 20px;
+            top: 80px; /* Increased to appear below the header */
             right: 20px;
             max-width: 350px;
             padding: 15px 20px;
@@ -21,7 +20,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
-            z-index: 1001;
+            z-index: 1001; /* Higher than header's z-index */
             transform: translateX(400px);
             transition: transform 0.4s ease;
             font-family: 'Poppins', sans-serif;
@@ -32,43 +31,27 @@
         }
 
         .notification-success {
-            background-color: #4CAF50;
+            background-color: var(--success, #4CAF50);
             color: white;
             border-left: 5px solid #2E7D32;
         }
 
         .notification-error {
-            background-color: #f44336;
+            background-color: var(--error, #f44336);
             color: white;
             border-left: 5px solid #B71C1C;
         }
 
-        .notification-icon {
-            margin-right: 12px;
-            font-size: 1.4em;
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .notification {
+                left: 20px;
+                right: 20px;
+                max-width: none;
+                top: 70px;
+            }
         }
 
-        .notification-message {
-            flex: 1;
-            font-size: 14px;
-            line-height: 1.4;
-        }
-
-        .notification-close {
-            background: transparent;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 1.2em;
-            margin-left: 10px;
-            opacity: 0.8;
-            transition: opacity 0.2s;
-        }
-
-        .notification-close:hover {
-            opacity: 1;
-        }
-        
         /* Form success highlight */
         .form-success {
             animation: formSuccess 1s ease;
@@ -126,7 +109,6 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Notification Element -->
@@ -518,7 +500,10 @@
                     body: JSON.stringify(discordPayload)
                 });
 
-                // Show success animation
+                // Clear form
+                form.reset();
+
+                // Show success animation on form container
                 formContainer.classList.add('form-success');
                 setTimeout(() => {
                     formContainer.classList.remove('form-success');
@@ -530,9 +515,6 @@
                     : 'ส่งใบสมัครของคุณเรียบร้อยแล้ว! โปรดรอประกาศผลทาง Facebook หรือ Discord';
 
                 showNotification(successMessage, 'success');
-                
-                // Clear form
-                form.reset();
                 
                 // Scroll to top
                 window.scrollTo({ top: 0, behavior: 'smooth' });
