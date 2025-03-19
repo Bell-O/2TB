@@ -152,8 +152,6 @@
                         <label for="why-join" data-lang="th" style="display:none;">ทำไมคุณถึงสนใจเข้าร่วมเป็นสมาชิกสภาผู้เล่นใน Hotel Hideaway?</label>
                         <textarea id="why-join" name="entry.Why are you interested in joining the Players' Council in Hotel Hideaway?" rows="5" required></textarea>
                     </div>
-                      rows="5" required></textarea>
-                    </div>
                     
                     <div class="form-group">
                         <label for="skills" data-lang="en">What skills or knowledge do you have that could help the council operate smoothly?</label>
@@ -241,80 +239,188 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
     <script>
-async function submitForm() {
-    const form = document.getElementById('councilForm');
-    const termsCheckbox = document.getElementById('terms');
-    const lang = localStorage.getItem('preferredLanguage') || 'en';
-
-    if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-    }
-
-    if (!termsCheckbox.checked) {
-        const message = lang === 'en' 
-            ? 'Please agree to the Terms of Use before submitting your application.'
-            : 'โปรดยอมรับข้อกำหนดการใช้งานก่อนส่งใบสมัครของคุณ';
-
-        showNotification(message, 'error');
-        return;
-    }
-
-    try {
-        // 📌 ดึง IP Address ของผู้ส่ง
-        let response = await fetch("https://api64.ipify.org?format=json");
-        let data = await response.json();
-        let userIP = data.ip;
-
-        // 🔒 เข้ารหัส IP ด้วย Base64
-        let encodedIP = btoa(userIP);
-
-        // 📌 ดึงข้อมูลทั้งหมดจากฟอร์ม
-        let formData = new FormData(form);
-        let formValues = {};
-        formData.forEach((value, key) => {
-            formValues[key] = value;
-        });
-
-        // 📌 จัดรูปแบบข้อมูลให้ส่งไปที่ Discord
-        let discordMessage = `📩 **New Application Submitted**\n\n`;
-        discordMessage += `🔐 **Apply ID:** \`${encodedIP}\`\n\n`;
-        
-        // 📝 Loop เพิ่มข้อมูลทั้งหมดของฟอร์ม
-        for (let key in formValues) {
-            discordMessage += `**${key.replace("entry.", "").replace(/_/g, " ")}**: ${formValues[key]}\n`;
+        // Language switching functionality
+        function setLanguage(lang) {
+            // Save the preferred language to localStorage
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // Update active button state
+            document.getElementById('lang-en').classList.remove('active');
+            document.getElementById('lang-th').classList.remove('active');
+            document.getElementById('lang-' + lang).classList.add('active');
+            
+            // Show/hide elements based on language
+            const enElements = document.querySelectorAll('[data-lang="en"]');
+            const thElements = document.querySelectorAll('[data-lang="th"]');
+            
+            enElements.forEach(el => {
+                el.style.display = lang === 'en' ? '' : 'none';
+            });
+            
+            thElements.forEach(el => {
+                el.style.display = lang === 'th' ? '' : 'none';
+            });
         }
 
-        // 📤 ส่งไปที่ Webhook Discord
-        let discordPayload = {
-            username: "Form Logger",
-            avatar_url: "https://example.com/avatar.png", // (เปลี่ยนเป็น URL รูปภาพได้)
-            content: discordMessage
-        };
+        // Notification system
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const notificationMessage = document.getElementById('notification-message');
+            const notificationIcon = notification.querySelector('.notification-icon');
+            
+            // Set message
+            notificationMessage.textContent = message;
+            
+            // Set icon based on type
+            if (type === 'error') {
+                notificationIcon.className = 'fas fa-exclamation-circle notification-icon';
+                notification.className = 'notification notification-error';
+            } else {
+                notificationIcon.className = 'fas fa-check-circle notification-icon';
+                notification.className = 'notification notification-success';
+            }
+            
+            // Show notification
+            notification.classList.add('show');
+            
+            // Auto-hide after 5 seconds
+            setTimeout(closeNotification, 5000);
+        }
 
-        await fetch("https://discord.com/api/webhooks/1351978006054440980/IH5HWSPvRglfsWjRgwhNUVuN0VLyZ2DfoUqFooIxxq10qNOBa_NK_-4ir9-pZ7O0IoWi", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(discordPayload)
+        function closeNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.remove('show');
+        }
+
+        // Terms modal functionality
+        function openTermsModal() {
+            const lang = localStorage.getItem('preferredLanguage') || 'en';
+            const message = lang === 'en' 
+                ? 'Terms of Use: By submitting this form, you agree that your information will be collected and shared with the Hotel Hideaway Players\' Council for decision-making purposes.'
+                : 'ข้อกำหนดการใช้งาน: โดยการส่งแบบฟอร์มนี้ คุณยอมรับว่าข้อมูลของคุณจะถูกเก็บรวบรวมและแชร์กับสภาผู้เล่น Hotel Hideaway เพื่อวัตถุประสงค์ในการตัดสินใจ';
+            
+            alert(message);
+            return false;
+        }
+
+        // Form submission
+        async function submitForm() {
+            const form = document.getElementById('councilForm');
+            const termsCheckbox = document.getElementById('terms');
+            const lang = localStorage.getItem('preferredLanguage') || 'en';
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            if (!termsCheckbox.checked) {
+                const message = lang === 'en' 
+                    ? 'Please agree to the Terms of Use before submitting your application.'
+                    : 'โปรดยอมรับข้อกำหนดการใช้งานก่อนส่งใบสมัครของคุณ';
+
+                showNotification(message, 'error');
+                return;
+            }
+
+            try {
+                // Get user IP
+                let response = await fetch("https://api64.ipify.org?format=json");
+                let data = await response.json();
+                let userIP = data.ip;
+
+                // Encode IP with Base64
+                let encodedIP = btoa(userIP);
+
+                // Get all form data
+                let formData = new FormData(form);
+                let formValues = {};
+                formData.forEach((value, key) => {
+                    formValues[key] = value;
+                });
+
+                // Format data for Discord
+                let discordMessage = `📩 **New Application Submitted**\n\n`;
+                discordMessage += `🔐 **Apply ID:** \`${encodedIP}\`\n\n`;
+                
+                // Add all form data
+                for (let key in formValues) {
+                    discordMessage += `**${key.replace("entry.", "").replace(/_/g, " ")}**: ${formValues[key]}\n`;
+                }
+
+                // Send to Discord Webhook
+                let discordPayload = {
+                    username: "Form Logger",
+                    avatar_url: "https://example.com/avatar.png",
+                    content: discordMessage
+                };
+
+                await fetch("https://discord.com/api/webhooks/1351978006054440980/IH5HWSPvRglfsWjRgwhNUVuN0VLyZ2DfoUqFooIxxq10qNOBa_NK_-4ir9-pZ7O0IoWi", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(discordPayload)
+                });
+
+                // Show success notification
+                const successMessage = lang === 'en'
+                    ? 'Your application has been submitted successfully! Please wait for the announcement on Facebook or Discord.'
+                    : 'ส่งใบสมัครของคุณเรียบร้อยแล้ว! โปรดรอประกาศผลทาง Facebook หรือ Discord';
+
+                showNotification(successMessage, 'success');
+                form.reset();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            } catch (error) {
+                console.error('Error submitting the form:', error);
+                const errorMessage = lang === 'en'
+                    ? 'Error submitting the form. Please try again.'
+                    : 'เกิดข้อผิดพลาดในการส่งแบบฟอร์ม โปรดลองอีกครั้ง';
+                showNotification(errorMessage, 'error');
+            }
+        }
+
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            // Apply saved language preference
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang) {
+                setLanguage(savedLang);
+            }
+            
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menu-toggle');
+            const mainNav = document.getElementById('main-nav');
+            
+            if (menuToggle && mainNav) {
+                menuToggle.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                });
+            }
+            
+            // Particles background
+            const particlesContainer = document.getElementById('particles');
+            if (particlesContainer) {
+                for (let i = 0; i < 50; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    
+                    // Random position
+                    particle.style.left = Math.random() * 100 + 'vw';
+                    particle.style.top = Math.random() * 100 + 'vh';
+                    
+                    // Random size
+                    const size = Math.random() * 5 + 2;
+                    particle.style.width = size + 'px';
+                    particle.style.height = size + 'px';
+                    
+                    // Random animation duration
+                    particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                    
+                    particlesContainer.appendChild(particle);
+                }
+            }
         });
-
-        // ✅ แจ้งเตือนว่าทำรายการสำเร็จ
-        const successMessage = lang === 'en'
-            ? 'Your application has been submitted successfully! Please wait for the announcement on Facebook or Discord.'
-            : 'ส่งใบสมัครของคุณเรียบร้อยแล้ว! โปรดรอประกาศผลทาง Facebook หรือ Discord';
-
-        showNotification(successMessage, 'success');
-        form.reset();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    } catch (error) {
-        console.error('Error submitting the form:', error);
-        showNotification("Error submitting the form. Please try again.", 'error');
-    }
-}
-
     </script>
 </body>
 </html>
